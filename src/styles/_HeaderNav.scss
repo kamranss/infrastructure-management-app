@@ -1,0 +1,54 @@
+.headernav_container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 3rem;
+  // height: 5rem;
+  width: 100%;
+  // height: 20%;
+  .main {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 15rem;
+    // background-color: gainsboro;
+    border-radius: 1rem;
+    width: 40%;
+    height: 5rem;
+    .header_nav_icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem;
+    }
+    .fa-solid {
+      font-size: 1.4rem;
+      color: rgb(117, 112, 112);
+      &:hover {
+        color: #2c3532;
+      }
+    }
+    // .span {
+    //   margin-top: 5%;
+    //   color: rgb(85, 80, 80);
+    //   text-decoration: solid;
+    //   font-weight: 400;
+    //   font-size: larger;
+    // }
+    .main_excel {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem;
+      // height: 5rem;
+      // width: 10%;
+      // margin-left: 10rem;
+    }
+  }
+}
+
+.active {
+  // background-color: #098d82;
+  .fa-solid {
+    color: #6926d7;
+  }
+}

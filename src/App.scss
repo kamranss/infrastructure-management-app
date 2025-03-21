@@ -1,0 +1,48 @@
+@import "./Styles/Header.scss";
+@import "./Styles/Global.scss";
+@import "./Styles/HeaderNav.scss";
+@import "./Styles/Department.scss";
+@import "./Styles/SideBar.scss";
+@import "./Styles/Export.scss";
+@import "./Styles/TableHeader.scss";
+@import "./Styles/Table.scss";
+@import "./Styles/SideBarEquipment.scss";
+@import "./Styles/FormInput.scss";
+@import "./Styles/FormEquipment.scss";
+@import "./Styles/EquipmentModal.scss";
+@import "./Styles/EquipmentDetail.scss";
+@import "./Styles/_FormUsageHistory.scss";
+@import "./Styles/_EndUsageHistory.scss";
+@import "./Styles/_VerifyEmail.scss";
+@import "./Styles/_Register.scss";
+@import "./Styles/_Spinner.scss";
+@import "./Styles/_EquipmentDetailModal";
+
+// .App {
+//     max-width: 1440px;
+//     margin: 0 auto;
+//     display: flex;
+//     justify-content: center;
+//   }
+//   body {
+//     background: $background;
+//     margin: 0;
+//     padding: 0;
+//   }
+//   ul {
+//     list-style: none;
+//     text-decoration: none;
+//     margin: 0;
+//     padding: 0;
+//   }
+
+//   svg {
+//     cursor: pointer !important;
+//   }
+
+//   h2 {
+//     @include fonts(700, 2.5rem, 2.875rem, 0.2px);
+//   }
+//   h5 {
+//     @include fonts(700, 1.25rem, 1.625rem, 0.2px);
+//   }
