@@ -1,0 +1,57 @@
+@use "./Styles/_Header.scss" as *;
+@use "./Styles/_Global.scss" as *;
+@use "./Styles/_HeaderNav.scss" as *;
+@use "./Styles/_Department.scss" as *;
+@use "./Styles/_SideBar.scss" as *;
+@use "./Styles/_Export.scss" as *;
+@use "./Styles/_TableHeader.scss" as *;
+@use "./Styles/_Table.scss" as *;
+@use "./Styles/_SideBarEquipment.scss" as *;
+@use "./Styles/_FormInput.scss" as *;
+@use "./Styles/_FormEquipment.scss" as *;
+@use "./Styles/_EquipmentModal.scss" as *;
+@use "./Styles/_EquipmentDetail.scss" as *;
+@use "./Styles/_FormUsageHistory.scss" as *;
+@use "./Styles/_EndUsageHistory.scss" as *;
+@use "./Styles/_VerifyEmail.scss" as *;
+@use "./Styles/_Register.scss" as *;
+@use "./Styles/_Spinner.scss" as *;
+@use "./Styles/_EquipmentDetailModal" as *;
+@use "./Styles/_Dashboard" as *;
+
+.body html {
+  width: 100% !important;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.App {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.MuiContainer-root {
+  margin: 0px !important; /* Remove margin */
+  padding: 0px !important; /* Remove padding */
+  width: 100% !important; /* Ensure full width */
+}
+
+// ul {
+//   list-style: none;
+//   text-decoration: none;
+//   margin: 0;
+//   padding: 0;
+// }
+
+// svg {
+//   cursor: pointer !important;
+// }
+
+// h2 {
+//   @include fonts(700, 2.5rem, 2.875rem, 0.2px);
+// }
+// h5 {
+//   @include fonts(700, 1.25rem, 1.625rem, 0.2px);
+// }

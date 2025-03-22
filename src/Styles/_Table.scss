@@ -1,0 +1,88 @@
+.pagination {
+  button {
+    background-color: white;
+    &.Mui-selected {
+      background-color: gray;
+    }
+  }
+  .select-mui {
+    background-color: white;
+    border: 1px solid white;
+    margin-right: 14px;
+    height: 35px;
+  }
+}
+
+.MuiTableBody-root {
+  tr:nth-child(even):hover {
+    /* Styles for even rows on hover */
+    border: 1px solid #e1cfff;
+    background: #eee3ff;
+  }
+
+  tr:nth-child(odd):hover {
+    /* Styles for odd rows on hover */
+    border: 1px solid #e1cfff;
+    background: #eee3ff;
+  }
+}
+.row-active {
+  background-color: #03a688;
+  color: white;
+
+  :last-child {
+    color: white;
+  }
+}
+
+.row-inactive {
+  background-color: rgb(114, 112, 112);
+  color: white;
+}
+
+.row-repair {
+  background-color: red;
+  color: white;
+}
+
+.row-inuse {
+  background-color: rgb(11, 114, 184);
+  color: white;
+}
+
+.row-concervated {
+  background-color: rgb(168, 20, 197);
+  color: white;
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0; // Icon is invisible at start and end
+  }
+  50% {
+    opacity: 1; // Icon is visible in the middle of animation
+  }
+}
+
+/* Apply the animation to the icon */
+i.fa-clock {
+  animation: fadeInOut 2s ease-in-out infinite; // Adjust duration and animation type as needed
+  color: #f2668b;
+  font-size: larger;
+}
+
+.row-start {
+  background-color: #03a688;
+  :last-child {
+    color: white;
+  }
+}
+
+.row-end {
+  background-color: rgb(114, 112, 112);
+}
+
+.row-cnl {
+  background-color: red;
+}
