@@ -10,9 +10,10 @@ import {
   HiMiniChevronDoubleRight,
   HiMiniChevronDoubleLeft,
   HiMiniChevronLeft,
-  HiMiniChevronRight,
-  HiMiniChevronDown,
+  // HiMiniChevronRight,
+  // HiMiniChevronDown,
 } from "react-icons/hi2";
+import { HiChevronDown, HiChevronRight } from "react-icons/hi";
 const PaginationComponent = ({
   size,
   setSize,
@@ -36,7 +37,7 @@ const PaginationComponent = ({
         onChange={(e) => setSize(e.target.value)}
         displayEmpty
         inputProps={{ "aria-label": "Without label" }}
-        IconComponent={() => <HiMiniChevronDown className="select-icon" />}
+        IconComponent={() => <HiChevronDown className="select-icon" />}
         className="select-mui"
       >
         <MenuItem value={5}>5</MenuItem>
@@ -54,7 +55,7 @@ const PaginationComponent = ({
           <PaginationItem
             slots={{
               previous: HiMiniChevronLeft,
-              next: HiMiniChevronRight,
+              next: HiChevronRight,
               first: HiMiniChevronDoubleLeft,
               last: HiMiniChevronDoubleRight,
             }}

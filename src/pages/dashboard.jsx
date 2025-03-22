@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-import { Grid, Card, CardContent, Typography, Box } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Menu } from "@mui/icons-material";
 import { Bar, Pie } from "react-chartjs-2";
+import DashboardSidebar from "../Components/SideBars/DashboardSidebar";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,8 +12,16 @@ import {
   Legend,
   ArcElement,
 } from "chart.js";
-
-// Register the chart.js components
+import {
+  Box,
+  IconButton,
+  AppBar,
+  Toolbar,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+} from "@mui/material";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -24,6 +33,12 @@ ChartJS.register(
 );
 
 export default function Dashboard() {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   useEffect(() => {
     // Logic for fetching data or initializing the chart (if needed)
   }, []);
@@ -65,6 +80,78 @@ export default function Dashboard() {
 
   return (
     <Box sx={{ flexGrow: 1, padding: 3 }}>
+      <DashboardSidebar open={sidebarOpen} onClose={toggleSidebar} />
+      <Box
+        sx={{
+          flexGrow: 1,
+          ml: sidebarOpen ? "240px" : 0,
+          transition: "margin 0.3s",
+        }}
+      >
+        {/* AppBar with toggle button */}
+        <AppBar
+          position="static"
+          maxWidth="40px"
+          sx={{ backgroundColor: "transparent" }}
+        >
+          <Toolbar
+            sx={{
+              position: "absolute",
+              top: 8,
+              left: 8,
+              ml: 20,
+              width: "40px",
+              height: "40px",
+              zIndex: 2000, // Make sure it's on top of everything
+              // backgroundColor: "#fff",
+              color: "#000",
+              // border: "1px solid #ccc",
+              // "&:hover": {
+              //   backgroundColor: "#eee",
+              // },
+            }}
+          >
+            <IconButton
+              color="inherit"
+              onClick={toggleSidebar}
+              edge="start"
+              sx={{
+                position: "absolute",
+                // top: 8,
+                // left: 8,
+                // ml: 0.001,
+                width: "40px",
+                height: "40px",
+                zIndex: 2000, // Make sure it's on top of everything
+                backgroundColor: "#fff",
+                color: "#000",
+                border: "5px solid #ccc",
+                "&:hover": {
+                  backgroundColor: "#d2b7f2",
+                },
+              }}
+            >
+              <Menu />
+            </IconButton>
+            <Typography variant="h6" sx={{ marginLeft: 2 }}></Typography>
+          </Toolbar>
+        </AppBar>
+
+        {/* Content area with padding & margin if sidebar is open */}
+        <Box
+          sx={{
+            padding: 3,
+            marginLeft: sidebarOpen ? "240px" : 0,
+            transition: "margin 0.3s",
+          }}
+        >
+          {/* Your Grid/cards/charts here */}
+          <Typography variant="h4" mb={2}>
+            Welcome to the Dashboard
+          </Typography>
+          {/* Add your existing Grid with cards/charts here */}
+        </Box>
+      </Box>
       <Grid container spacing={3}>
         {/* Arrived Card */}
         <Grid item xs={12} sm={6} md={3}>

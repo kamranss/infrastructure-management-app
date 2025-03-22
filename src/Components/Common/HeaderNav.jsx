@@ -1,8 +1,31 @@
 import React from "react";
+// import ExportExcel from "../Components/Common/Export/ExportExcel";
 import { NavLink } from "react-router-dom";
-// import { AiFillAppstore } from "react-icons/ai";
+import { Button } from "@mui/material";
+import { Download } from "@mui/icons-material";
+
+// import { List as ListIcon } from "@mui/icons-material";
 import ExportExcel from "../ExportExcel";
-// import {IoAppsSharp} from "react-icons/io"
+import {
+  FaList,
+  FaTasks,
+  FaCalendarCheck,
+  FaWarehouse,
+  FaShoppingCart,
+  FaChartLine,
+  FaUserCog,
+  FaSlidersH,
+} from "react-icons/fa";
+import {
+  List as ListIcon,
+  TaskAlt,
+  CalendarMonth,
+  Warehouse,
+  ShoppingCart,
+  ShowChart,
+  ManageAccounts,
+  Tune,
+} from "@mui/icons-material";
 
 const HeaderNav = () => {
   return (
@@ -14,8 +37,7 @@ const HeaderNav = () => {
             isActive ? "active header_nav_icon" : "header_nav_icon"
           }
         >
-          {/* <AiFillAppstore className="icon" /> */}
-          <i className="fa-solid fa-list"></i>
+          <ListIcon className="icon" />
         </NavLink>
         <NavLink
           to="/mppage"
@@ -23,54 +45,63 @@ const HeaderNav = () => {
             isActive ? "active header_nav_icon" : "header_nav_icon"
           }
         >
-          <i className="fa-solid fa-bars-progress"></i>
+          <TaskAlt className="icon" />
         </NavLink>
         <NavLink
-          className={({ isActive }) =>
-            isActive ? "active header_nav_icon" : "header_nav_icon"
-          }
           to="/usageHistory"
-        >
-          <i className="fa-solid fa-calendar-check"></i>
-        </NavLink>
-        <NavLink
           className={({ isActive }) =>
             isActive ? "active header_nav_icon" : "header_nav_icon"
           }
+        >
+          <CalendarMonth className="icon" />
+        </NavLink>
+        <NavLink
           to="/department"
-        >
-          <i className="fa-solid fa-warehouse"></i>
-        </NavLink>
-        <NavLink
           className={({ isActive }) =>
             isActive ? "active header_nav_icon" : "header_nav_icon"
           }
+        >
+          <Warehouse className="icon" />
+        </NavLink>
+        <NavLink
           to="/department"
-        >
-          <i className="fa-solid fa-cart-shopping"></i>
-        </NavLink>
-        <NavLink
           className={({ isActive }) =>
             isActive ? "active header_nav_icon" : "header_nav_icon"
           }
-          to="/"
         >
-          <i className="fa-solid fa-chart-line"></i>
+          <ShoppingCart className="icon" />
         </NavLink>
-        <NavLink className="header_nav_icon" to="/department">
-          <i className="fa-solid fa-user-gear"></i>
-        </NavLink>
+
         <NavLink
+          to="/dashboard"
           className={({ isActive }) =>
             isActive ? "active header_nav_icon" : "header_nav_icon"
           }
+        >
+          <ShowChart className="icon" />
+        </NavLink>
+
+        <NavLink
+          to="/department"
+          className={({ isActive }) =>
+            isActive ? "active header_nav_icon" : "header_nav_icon"
+          }
+        >
+          <ManageAccounts className="icon" />
+        </NavLink>
+        <NavLink
           to="/administration"
+          className={({ isActive }) =>
+            isActive ? "active header_nav_icon" : "header_nav_icon"
+          }
         >
-          <i className="fa-solid fa-sliders"></i>
+          <Tune className="icon" />
         </NavLink>
-      </div>
-      <div className="main_excel">
-        <ExportExcel />
+
+        <div className="main_excel">
+          {" "}
+          <ExportExcel />
+        </div>
       </div>
     </div>
   );

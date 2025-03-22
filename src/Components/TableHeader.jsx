@@ -1,19 +1,26 @@
 import React from "react";
-// import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquarePlus } from "@fortawesome/free-regular-svg-icons";
+import {
+  faCloudArrowDown,
+  faEyeSlash,
+} from "@fortawesome/free-solid-svg-icons";
+// import React, { useState } from "react";
+
 const TableHeader = () => {
   return (
     <div className="tableHeadContainer">
       <div className="tableHead">
         <div className="tableHeadBox">
           <NavLink className="header_nav_icon" to="/CreateEquipment">
-            <i className="fa-regular fa-square-plus"></i>
+            <FontAwesomeIcon icon={faSquarePlus} />
           </NavLink>
           <NavLink className="header_nav_icon" to="/EquipmentPage">
-            <i className="fa-solid fa-cloud-arrow-down"></i>
+            <FontAwesomeIcon icon={faCloudArrowDown} />
           </NavLink>
           <NavLink className="header_nav_icon" to="/EquipmentPage">
-            <i className="fa-solid fa-eye-slash"></i>
+            <FontAwesomeIcon icon={faEyeSlash} />
           </NavLink>
         </div>
       </div>

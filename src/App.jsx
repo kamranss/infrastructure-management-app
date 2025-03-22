@@ -1,7 +1,7 @@
 import "./App.scss";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HeaderNav from "./components/Common/HeaderNav";
+import HeaderNav from "./Components/Common/HeaderNav";
 import Dashboard from "./pages/dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -10,6 +10,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Box, Grid } from "@mui/material";
 import "font-awesome/css/font-awesome.min.css";
 import { useLocation } from "react-router-dom";
+import EquipmentPage from "./pages/EquipmentPage";
 
 // Theme customization
 const theme = createTheme({
@@ -53,6 +54,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/equipmentpage" element={<EquipmentPage />} />
               {/* Add more routes here as needed */}
             </Routes>
           </ErrorBoundary>
