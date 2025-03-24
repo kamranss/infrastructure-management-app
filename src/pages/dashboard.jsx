@@ -91,7 +91,8 @@ export default function Dashboard() {
         {/* AppBar with toggle button */}
         <AppBar
           position="static"
-          maxWidth="40px"
+          // maxWidth="40px"
+          style={{ maxWidth: "40px" }}
           sx={{ backgroundColor: "transparent" }}
         >
           <Toolbar

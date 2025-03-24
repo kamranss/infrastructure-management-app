@@ -2,9 +2,11 @@ import "./App.scss";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HeaderNav from "./Components/Common/HeaderNav";
+import Header from "./Components/Common/Header";
 import Dashboard from "./pages/dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ChatPage from "./pages/ChatPage";
 import ErrorBoundary from "./Components/ErrorBoundary";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Box, Grid } from "@mui/material";
@@ -12,7 +14,6 @@ import "font-awesome/css/font-awesome.min.css";
 import { useLocation } from "react-router-dom";
 import EquipmentPage from "./pages/EquipmentPage";
 
-// Theme customization
 const theme = createTheme({
   palette: {
     primary: {
@@ -27,24 +28,26 @@ const theme = createTheme({
 const App = () => {
   const location = useLocation();
 
-  // Hide HeaderNav for Login and Register pages
+  // Hide HeaderNav and header for Login and Register pages
+  const hideHeader =
+    location.pathname === "/login" || location.pathname === "/register";
   const hideHeaderNav =
     location.pathname === "/login" || location.pathname === "/register";
 
   return (
     <ThemeProvider theme={theme} style={{ width: "100%" }}>
-      {/* Set height to 100vh to make the page use full height */}
       <Box
         sx={{
           backgroundColor: "#f0f0f0",
-          minHeight: "100vh", // Ensure the full page is covered
+          minHeight: "100vh",
           width: "100%",
           display: "flex",
-          flexDirection: "column", // Stack content vertically
+          flexDirection: "column",
         }}
       >
         <div style={{ flexGrow: 1 }}>
-          {/* Conditionally render HeaderNav */}
+          {/* Conditionally render HeaderNav and Header */}
+          {!hideHeader && <Header />}
           {!hideHeaderNav && <HeaderNav />}
 
           {/* Wrap the Routes inside ErrorBoundary */}
@@ -55,7 +58,7 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/equipmentpage" element={<EquipmentPage />} />
-              {/* Add more routes here as needed */}
+              <Route path="/chat" element={<ChatPage />} />
             </Routes>
           </ErrorBoundary>
         </div>
@@ -66,7 +69,7 @@ const App = () => {
 
 const AppWrapper = () => (
   <Router>
-    <App /> {/* Router wrapper around the App */}
+    <App />
   </Router>
 );
 
