@@ -12,7 +12,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Box, Grid } from "@mui/material";
 import "font-awesome/css/font-awesome.min.css";
 import { useLocation } from "react-router-dom";
-import EquipmentPage from "./pages/EquipmentPage";
+import AssetsPage from "./pages/AssetsPage";
 
 const theme = createTheme({
   palette: {
@@ -57,7 +57,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/equipmentpage" element={<EquipmentPage />} />
+              <Route path="/assetsPage" element={<AssetsPage />} />
               <Route path="/chat" element={<ChatPage />} />
             </Routes>
           </ErrorBoundary>

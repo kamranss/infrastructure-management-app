@@ -9,13 +9,14 @@ import {
   Typography,
   CircularProgress,
 } from "@mui/material";
-import { CHAT_COMPLETIONS_ENDPOINT } from "../constants/apiRoutes";
-import { App_Base_URL } from "../constants/apiRoutes";
+import {
+  CHAT_COMPLETIONS_ENDPOINT,
+  App_Base_URL,
+} from "../constants/apiRoutes";
 
 const ChatPage = () => {
   const [sessions, setSessions] = useState([]);
   const [currentSessionId, setCurrentSessionId] = useState(null);
-  const [messages, setMessages] = useState([]);
   const [chatData, setChatData] = useState({});
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,14 +27,15 @@ const ChatPage = () => {
     if (!userInput.trim()) return;
 
     const userMessage = { sender: "user", text: userInput };
-    setMessages((prev) => [...prev, userMessage]);
 
-    const updatedMessages = [...messages, userMessage];
+    const currentMessages = chatData[currentSessionId] || [];
+    const updatedMessages = [...currentMessages, userMessage];
 
     setChatData((prev) => ({
       ...prev,
       [currentSessionId]: updatedMessages,
     }));
+
     setUserInput("");
     setLoading(true);
 
@@ -41,7 +43,7 @@ const ChatPage = () => {
       const res = await axios.post(
         CHAT_COMPLETIONS_ENDPOINT,
         {
-          model: "openai/gpt-3.5-turbo", // You can change model
+          model: "openai/gpt-3.5-turbo",
           messages: [
             { role: "system", content: "You are a helpful assistant." },
             { role: "user", content: userInput },
@@ -60,13 +62,11 @@ const ChatPage = () => {
       const botReply = res.data.choices[0].message.content;
       const botMessage = { sender: "bot", text: botReply };
 
-      // setMessages((prev) => [...prev, botMessage]);
       setChatData((prev) => ({
         ...prev,
         [currentSessionId]: [...updatedMessages, botMessage],
       }));
 
-      // Optional: update session title if empty
       setSessions((prev) =>
         prev.map((s) =>
           s.id === currentSessionId && !s.title
@@ -88,18 +88,6 @@ const ChatPage = () => {
     }
   };
 
-  // const handleNewChat = () => {
-  //   const newId = uuidv4();
-  //   setSessions((prev) => [...prev, { id: newId, title: "" }]);
-  //   setCurrentSessionId(newId);
-  //   setMessages([]);
-  // };
-
-  // const handleSelectSession = (sessionId) => {
-  //   setCurrentSessionId(sessionId);
-  //   setMessages([]); // You can load saved messages per session later
-  // };
-
   const handleNewChat = () => {
     const newId = uuidv4();
     setSessions((prev) => [...prev, { id: newId, title: "" }]);
@@ -113,6 +101,9 @@ const ChatPage = () => {
   const handleSelectSession = (sessionId) => {
     setCurrentSessionId(sessionId);
   };
+
+  const currentMessages = chatData[currentSessionId] || [];
+
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
       {/* Sidebar */}
@@ -142,7 +133,7 @@ const ChatPage = () => {
             overflowY: "auto",
           }}
         >
-          {(chatData[currentSessionId] || []).map((msg, idx) => (
+          {currentMessages.map((msg, idx) => (
             <Box
               key={idx}
               sx={{

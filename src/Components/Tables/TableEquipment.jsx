@@ -8,6 +8,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import VisibilityIcon from "@mui/icons-material/Visibility"; // make sure this is imported
+import { IconButton, Tooltip } from "@mui/material";
 
 export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
   rows.sort((a, b) => {
@@ -28,8 +32,42 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
+            <TableCell
+              sx={{
+                backgroundColor: "rgb(190, 213, 236)",
+                fontWeight: "bold",
+                borderBottom: "2px solid #e0e0e0",
+                color: "#333",
+                fontSize: "15px",
+              }}
+            >
+              Details
+            </TableCell>
+            {/* <TableCell
+              sx={{
+                backgroundColor: "rgb(190, 213, 236)",
+                fontWeight: "bold",
+                borderBottom: "2px solid #e0e0e0",
+                color: "#333",
+                fontSize: "15px",
+              }}
+            >
+              MP Time
+            </TableCell> */}
             {thead?.map((th, key) => (
-              <TableCell key={key}>{th}</TableCell>
+              <TableCell
+                key={key}
+                sx={{
+                  backgroundColor: "rgb(190, 213, 236)", // Light gray bg
+                  fontWeight: "bold",
+                  borderBottom: "2px solid #e0e0e0",
+                  color: "#333",
+                  fontSize: "15px",
+                  textTransform: "capitalize",
+                }}
+              >
+                {th}
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -55,19 +93,44 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
                 // className={`row ${statusclassName}`} // Add 'row' className and status className
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell align="left">
-                  {/* {" "} */}
-                  {console.log("mpTime:", row.mpTime)}
-                  {console.log(
-                    "Condition:",
-                    row.mptime != true && row.mptime != null
-                  )}
+                {/* <TableCell align="left">
                   {row.mpTime !== true && row.mpTime !== null ? (
-                    <i className="far fa-clock"></i> // Clock icon for incomplete
+                    <AccessTimeIcon
+                      sx={{
+                        color: "#fbc02d",
+                        animation: "pulse 1.2s infinite",
+                      }}
+                    />
                   ) : (
-                    <i className="fa-solid fa-check"></i>
+                    <CheckCircleIcon sx={{ color: "#66bb6a" }} />
+                  )}
+                </TableCell> */}
+
+                <TableCell align="left">
+                  <Tooltip title="View Asset Details">
+                    <IconButton
+                      component={NavLink}
+                      to={`/assetdetails?id=${row.id}`}
+                      size="small"
+                    >
+                      <VisibilityIcon sx={{ color: "#1976d2" }} />
+                    </IconButton>
+                  </Tooltip>
+                </TableCell>
+
+                <TableCell align="left">
+                  {row.mpTime !== true && row.mpTime !== null ? (
+                    <AccessTimeIcon
+                      sx={{
+                        color: "#fbc02d",
+                        animation: "pulse 1.2s infinite",
+                      }}
+                    />
+                  ) : (
+                    <CheckCircleIcon sx={{ color: "#66bb6a" }} />
                   )}
                 </TableCell>
+
                 <TableCell align="left">{row?.id}</TableCell>
 
                 <TableCell align="left">{row?.name}</TableCell>
@@ -113,7 +176,9 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
                 </TableCell>
 
                 <TableCell align="left">
-                  {moment(row?.lastMaintenace).format("DD-MM-YYYY") || "-"}
+                  {row?.lastMaintenace && moment(row.lastMaintenace).isValid()
+                    ? moment(row.lastMaintenace).format("DD-MM-YYYY")
+                    : "Not Available"}
                 </TableCell>
                 <TableCell align="left">{row?.currentValue || "-"}</TableCell>
 

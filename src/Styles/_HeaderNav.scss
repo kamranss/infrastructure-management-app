@@ -1,145 +1,87 @@
-// .headernav_container {
-//   display: flex;
-//   justify-content: space-around;
-//   margin-top: 3rem;
-//   // height: 5rem;
-//   width: 100%;
-//   background-color: #d0baf1;
-//   // height: 20%;
-//   .main {
-//     display: flex;
-//     justify-content: space-between;
-//     margin-left: 15rem;
-//     // background-color: gainsboro;
-//     border-radius: 1rem;
-//     width: 40%;
-//     height: 5rem;
-//     .header_nav_icon {
-//       visibility: visible;
-//       display: flex;
-//       flex-direction: column;
-//       align-items: center;
-//       font-size: 1.5rem;
-//       padding: 4.5rem;
-//       color: rgb(169, 218, 218);
-//       font-size: 1.8rem;
-//       color: rgb(98, 199, 224); /* Adjust icon color */
-//     }
-//     .fa-solid {
-//       font-size: 6rem;
-//       color: rgb(3, 33, 41);
-//       &:hover {
-//         color: #2c3532;
-//       }
-//     }
-//     // .span {
-//     //   margin-top: 5%;
-//     //   color: rgb(85, 80, 80);
-//     //   text-decoration: solid;
-//     //   font-weight: 400;
-//     //   font-size: larger;
-//     // }
-//     .main_excel {
-//       width: 100%;
-//       display: flex;
-//       justify-content: center;
-//       align-items: center;
-//       padding: 3rem;
-//       // height: 5rem;
-//       // width: 10%;
-//       // margin-left: 10rem;
-//     }
-//   }
-// }
-
-// .active {
-//   // background-color: #098d82;
-//   .fa-solid {
-//     color: #6926d7;
-//   }
-// }
-
 .headernav_container {
   display: flex;
   justify-content: space-around;
   margin-top: 3rem;
   width: 100%;
-  background-color: #d0baf1;
-}
+  // background-color: #d0baf1;
+  background-color: #dad7df;
+  .main {
+    display: flex;
+    justify-content: space-between;
+    align-items: normal;
+    margin-left: 24%;
+    border-radius: 1rem;
+    width: 100%;
+    height: 5rem;
 
-// .main {
-//   display: flex;
-//   justify-content: space-between;
-//   margin-left: 15rem;
-//   border-radius: 1rem;
-//   width: 40%;
-//   height: 5rem;
-// }
+    .nav-wrapper {
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      width: 5%;
+      height: 90%;
+      margin-top: 0.3%;
+      transition: background-color 0.3s ease;
 
-// .header_nav_icon {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   padding: 4.5rem;
-//   font-size: 1.8rem;
-//   color: rgb(2, 14, 17);
-//   transition: color 0.3s;
-// }
+      &:hover {
+        // background-color: #a479eb;
+        background-color: #6289dd;
 
-// .header_nav_icon:hover {
-//   color: #2c3532;
-// }
+        .header_nav_icon {
+          color: #470ba7;
+          display: flex;
+          justify-content: center;
+          .icon {
+            color: #470ba7;
+            transform: scale(1.2);
+          }
+        }
+      }
 
-// .main_excel {
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 3rem;
-// }
+      &.active {
+        background-color: #6289dd;
+      }
+    }
 
-.main {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; // 🔥 ensures vertical alignment
-  margin-left: 15rem;
-  border-radius: 1rem;
-  width: 100%;
-  height: 5rem;
-}
+    .header_nav_icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      font-size: 2.1rem;
+      font-weight: 500;
+      transition: color 0.3s;
+      .icon {
+        font-size: 1.9rem;
+        color: inherit;
+        transition: color 0.3s ease;
+      }
+    }
 
-.header_nav_icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  font-size: 1.8rem;
-  color: rgb(2, 14, 17);
-  transition: color 0.3s;
-}
+    .main_excel {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5%;
+      height: 90%;
+      margin-top: 0.3%;
+      margin-right: 2%;
+      transition: background-color 0.3s ease;
+      font-weight: 500;
+      border-radius: 10px;
+      padding: 2rem;
+      font-size: 2.1rem;
+      transition: background-color 0.3s ease;
 
-.main_excel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1rem;
-}
+      &:hover {
+        background-color: #a479eb;
+      }
 
-.active .header_nav_icon {
-  color: #6926d7;
-}
-
-.export-excel-button {
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: 500;
-  text-transform: none; // optional: remove uppercase text
-
-  &:hover {
-    background-color: #388e3c !important; // darker green on hover
-  }
-
-  .MuiButton-startIcon {
-    margin-right: 8px;
+      // .MuiButton-startIcon {
+      //   margin-right: 8px;
+      // }
+    }
   }
 }
