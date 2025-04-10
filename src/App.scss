@@ -6,19 +6,19 @@
 @use "./Styles/_Export.scss" as *;
 @use "./Styles/_TableHeader.scss" as *;
 @use "./Styles/_Table.scss" as *;
-@use "./Styles/_SideBarAssets.scss" as *;
 @use "./Styles/_FormInput.scss" as *;
-@use "./Styles/_FormEquipment.scss" as *;
-@use "./Styles/_EquipmentModal.scss" as *;
-@use "./Styles/_EquipmentDetail.scss" as *;
+@use "./styles/AssetPage" as *;
+@use "./Styles/_AssetSideBar.scss" as *;
+@use "./Styles/_AssetForm.scss" as *;
+@use "./Styles/_AssetModal.scss" as *;
+@use "./Styles/_AssetDetail.scss" as *;
+@use "./Styles/_AssetDetailModal" as *;
 @use "./Styles/_FormUsageHistory.scss" as *;
 @use "./Styles/_EndUsageHistory.scss" as *;
 @use "./Styles/_VerifyEmail.scss" as *;
 @use "./Styles/_Register.scss" as *;
 @use "./Styles/_Spinner.scss" as *;
-@use "./Styles/_EquipmentDetailModal" as *;
 @use "./Styles/_Dashboard" as *;
-@use "./styles/AssetPage" as *;
 
 .body html {
   width: 100% !important;

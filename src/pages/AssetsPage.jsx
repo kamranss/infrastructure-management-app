@@ -9,7 +9,8 @@ import { CircularProgress } from "@mui/material";
 import PaginationComponent from "../Components/PaginationComponent";
 import SideBarAssets from "../Components/SideBarAssets";
 import TableHeader from "../Components/TableHeader";
-import TableEquipment from "../Components/Tables/TableEquipment";
+import TableAsset from "../Components/Tables/TableAsset";
+import { useNavigate } from "react-router-dom";
 //url
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const EQUIPMENT_ENDPOINT =
@@ -191,7 +192,7 @@ const AssetsPage = () => {
             <TableHeader />
 
             {activeTab === 0 && data && (
-              <TableEquipment
+              <TableAsset
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
@@ -199,7 +200,7 @@ const AssetsPage = () => {
               />
             )}
             {activeTab === 1 && data && (
-              <TableEquipment
+              <TableAsset
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
@@ -207,7 +208,7 @@ const AssetsPage = () => {
               />
             )}
             {activeTab === 2 && data && (
-              <TableEquipment
+              <TableAsset
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
@@ -215,7 +216,7 @@ const AssetsPage = () => {
               />
             )}
             {activeTab === 3 && data && (
-              <TableEquipment
+              <TableAsset
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
@@ -223,7 +224,7 @@ const AssetsPage = () => {
               />
             )}
             {activeTab === 4 && data && (
-              <TableEquipment
+              <TableAsset
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
@@ -231,7 +232,7 @@ const AssetsPage = () => {
               />
             )}
             {activeTab === 5 && data && (
-              <TableEquipment
+              <TableAsset
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
@@ -239,7 +240,7 @@ const AssetsPage = () => {
               />
             )}
             {activeTab === 6 && data && (
-              <TableEquipment
+              <TableAsset
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
@@ -247,7 +248,7 @@ const AssetsPage = () => {
               />
             )}
             {activeTab === 7 && data && (
-              <TableEquipment
+              <TableAsset
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
@@ -255,7 +256,7 @@ const AssetsPage = () => {
               />
             )}
             {activeTab === 8 && data && (
-              <TableEquipment
+              <TableAsset
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}

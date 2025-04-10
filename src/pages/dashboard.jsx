@@ -153,13 +153,13 @@ export default function Dashboard() {
           {/* Add your existing Grid with cards/charts here */}
         </Box>
       </Box>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ mb: "2rem" }}>
         {/* Arrived Card */}
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ backgroundColor: "#E3F2FD" }}>
             <CardContent>
               <Typography variant="h6" color="blue">
-                Arrived
+                Ongoing Maintenance
               </Typography>
               <Typography variant="body1">
                 Arrived (port entry): 12.09.2025, 22:48
@@ -176,7 +176,7 @@ export default function Dashboard() {
           <Card sx={{ backgroundColor: "#F3E5F5" }}>
             <CardContent>
               <Typography variant="h6" color="purple">
-                Departed
+                Asset Statuses
               </Typography>
               <Typography variant="body1">
                 Departed (from yard): 12.09.2025, 22:48
@@ -193,7 +193,7 @@ export default function Dashboard() {
           <Card sx={{ backgroundColor: "#FFF3E0" }}>
             <CardContent>
               <Typography variant="h6" color="orange">
-                Dwell Time
+                Inventory
               </Typography>
               <Typography variant="body1">
                 Storage dwell time: 5 days, 54 min
@@ -210,7 +210,7 @@ export default function Dashboard() {
           <Card sx={{ backgroundColor: "#F1F8E9" }}>
             <CardContent>
               <Typography variant="h6" color="teal">
-                Planned Location
+                Usage History
               </Typography>
               <Typography variant="body1">Planned Area: Area</Typography>
               <Typography variant="body1">

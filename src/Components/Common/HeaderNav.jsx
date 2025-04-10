@@ -17,13 +17,16 @@ import {
   FileDownload,
   Tune,
 } from "@mui/icons-material";
+import BuildCircleIcon from "@mui/icons-material/BuildCircle";
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 
 const navLinks = [
   { to: "/assetsPage", icon: <ListIcon /> },
-  { to: "/mppage", icon: <TaskAlt /> },
+  { to: "/AssetDetails", icon: <TaskAlt /> },
   { to: "/usageHistory", icon: <CalendarMonth /> },
-  { to: "/department", icon: <Warehouse /> },
-  { to: "/department", icon: <ShoppingCart /> },
+  { to: "/mppage", icon: <BuildCircleIcon /> },
+  { to: "/inventorypage", icon: <Warehouse /> },
+  { to: "/department", icon: <CorporateFareIcon /> },
   { to: "/dashboard", icon: <ShowChart /> },
   { to: "/chat", icon: <ChatBubbleOutline /> },
   { to: "/administration", icon: <Tune /> },

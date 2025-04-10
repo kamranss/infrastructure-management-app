@@ -13,7 +13,7 @@ import {
   TablePagination,
 } from "@mui/material";
 
-const TableEquipmentPart = ({ parts }) => {
+const TableAssetPart = ({ parts }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -36,7 +36,11 @@ const TableEquipmentPart = ({ parts }) => {
     <>
       <TableContainer component={Paper}>
         <Table>
-          <TableHead>
+          <TableHead
+            sx={{
+              backgroundColor: "rgb(190, 213, 236)",
+            }}
+          >
             <TableRow>
               <TableCell>ID</TableCell>
               <TableCell>Code</TableCell>
@@ -83,4 +87,4 @@ const TableEquipmentPart = ({ parts }) => {
   );
 };
 
-export default TableEquipmentPart;
+export default TableAssetPart;

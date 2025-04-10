@@ -1,28 +1,34 @@
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import VisibilityIcon from "@mui/icons-material/Visibility"; // make sure this is imported
-import { IconButton, Tooltip } from "@mui/material";
 
-export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
+export default function TableAsset({ thead = [], rows = [], onRowClick }) {
   rows.sort((a, b) => {
     // Convert mpTime to boolean (null and true will be treated as true, false will be treated as false)
+    // const aMpTime = !!a.mpTime;
+    // const bMpTime = !!b.mpTime;
+
+    // if (aMpTime < bMpTime) return -1;
+    // if (aMpTime > bMpTime) return 1;
+
     const aMpTime = !!a.mpTime;
     const bMpTime = !!b.mpTime;
-
-    // Sort based on mpTime (false first)
-    if (aMpTime < bMpTime) return -1;
-    if (aMpTime > bMpTime) return 1;
-    return 0;
+    return aMpTime - bMpTime;
+    // return 0;
   });
   return (
     <TableContainer
@@ -43,17 +49,7 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
             >
               Details
             </TableCell>
-            {/* <TableCell
-              sx={{
-                backgroundColor: "rgb(190, 213, 236)",
-                fontWeight: "bold",
-                borderBottom: "2px solid #e0e0e0",
-                color: "#333",
-                fontSize: "15px",
-              }}
-            >
-              MP Time
-            </TableCell> */}
+
             {thead?.map((th, key) => (
               <TableCell
                 key={key}
@@ -93,24 +89,12 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
                 // className={`row ${statusclassName}`} // Add 'row' className and status className
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                {/* <TableCell align="left">
-                  {row.mpTime !== true && row.mpTime !== null ? (
-                    <AccessTimeIcon
-                      sx={{
-                        color: "#fbc02d",
-                        animation: "pulse 1.2s infinite",
-                      }}
-                    />
-                  ) : (
-                    <CheckCircleIcon sx={{ color: "#66bb6a" }} />
-                  )}
-                </TableCell> */}
-
                 <TableCell align="left">
                   <Tooltip title="View Asset Details">
                     <IconButton
                       component={NavLink}
-                      to={`/assetdetails?id=${row.id}`}
+                      // to={`/assetdetails?id=${row.id}`}
+                      to={`/assetdetails/${row.id}`}
                       size="small"
                     >
                       <VisibilityIcon sx={{ color: "#1976d2" }} />

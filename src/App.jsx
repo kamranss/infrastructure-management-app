@@ -13,6 +13,11 @@ import { Box, Grid } from "@mui/material";
 import "font-awesome/css/font-awesome.min.css";
 import { useLocation } from "react-router-dom";
 import AssetsPage from "./pages/AssetsPage";
+import InventoryPage from "./pages/InventoryPage";
+import AssetDetails from "./pages/AssetDetails";
+
+// const isAssetDetailsPage = location.pathname.startsWith("/assetdetails");
+// const imageUrl = "/assets/images/assetmanagement.png";
 
 const theme = createTheme({
   palette: {
@@ -50,6 +55,17 @@ const App = () => {
           {!hideHeader && <Header />}
           {!hideHeaderNav && <HeaderNav />}
 
+          {/* {!hideHeader && (
+            <div className={isAssetDetailsPage ? "header-bg-image" : ""}>
+              <Header />
+            </div>
+          )}
+          {!hideHeaderNav && (
+            <div className={isAssetDetailsPage ? "header-bg-image" : ""}>
+              <HeaderNav />
+            </div>
+          )} */}
+
           {/* Wrap the Routes inside ErrorBoundary */}
           <ErrorBoundary>
             <Routes>
@@ -58,6 +74,8 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/assetsPage" element={<AssetsPage />} />
+              <Route path="/inventorypage" element={<InventoryPage />} />{" "}
+              <Route path="/assetdetails/:id" element={<AssetDetails />} />
               <Route path="/chat" element={<ChatPage />} />
             </Routes>
           </ErrorBoundary>

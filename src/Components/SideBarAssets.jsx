@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-// import BusinessIcon from "@mui/icons-material/Business";
-// import DomainIcon from "@mui/icons-material/Domain";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import axios from "axios";
 
@@ -30,19 +28,6 @@ const SideBarAssets = ({ activeTab, onTabChange }) => {
 
     fetchDepartments();
   }, []);
-
-  // // Filter logic (case-insensitive match)
-  // const filteredDepartments = departments
-  //   .filter((dept) =>
-  //     dept.name.toLowerCase().includes(searchTerm.toLowerCase())
-  //   )
-  //   .slice(0, 6); // only show first 10
-
-  // const totalPages = Math.ceil(filtered.length / pageSize);
-  // const paginatedDepartments = filtered.slice(
-  //   (page - 1) * pageSize,
-  //   page * pageSize
-  // );
 
   const filtered = departments.filter((dept) =>
     dept.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -112,59 +97,3 @@ const SideBarAssets = ({ activeTab, onTabChange }) => {
 };
 
 export default SideBarAssets;
-
-//   return (
-//     <div className="division_sidebar">
-//       <div className="heading">
-//         <h2 className="heading_name">Division List</h2>
-//       </div>
-//       <input
-//         type="text"
-//         placeholder="Find divisions..."
-//         value={searchTerm}
-//         onChange={(e) => {
-//           setSearchTerm(e.target.value);
-//           setPage(1); // Reset to page 1 when filtering
-//         }}
-//         className="division-filter"
-//       />
-
-//       {filteredDepartments.map((dept, index) => (
-//         <div
-//           key={dept.id}
-//           className={`division-item-wrapper ${
-//             activeTab === index ? "active" : ""
-//           }`}
-//           onClick={() => onTabChange(index)}
-//         >
-//           <NavLink className="division-item">
-//             <CorporateFareIcon className="division-icon" />
-//             <span className="span">{dept.name}</span>
-//           </NavLink>
-//           {/* Pagination Controls */}
-//           <div className="pagination-controls">
-//             <button
-//               disabled={page === 1}
-//               onClick={() => setPage((p) => p - 1)}
-//               className="page-btn"
-//             >
-//               Prev
-//             </button>
-//             <span className="page-indicator">
-//               Page {page} / {totalPages}
-//             </span>
-//             <button
-//               disabled={page === totalPages}
-//               onClick={() => setPage((p) => p + 1)}
-//               className="page-btn"
-//             >
-//               Next
-//             </button>
-//           </div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default SideBarAssets;

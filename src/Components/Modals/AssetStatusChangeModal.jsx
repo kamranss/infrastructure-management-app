@@ -13,45 +13,47 @@ import {
   Modal,
 } from "@mui/material";
 
-const EquipmentAddMpSettingModal = ({
+const AssetStatusChangeModal = ({
   isOpen,
   onClose,
   equipmentId,
-  onMpaddSuccess,
+  onStatusChangeSuccess,
 }) => {
   const MySwal = withReactContent(Swal);
 
   const [validationErrors, setValidationErrors] = useState({});
 
-  const [mpOption, setMpOptions] = useState([]);
-  const [selectedMpId, setSelecMpId] = useState("");
-  const [selectedMp, setSelectedMp] = useState(null);
-  const [resetValue, setresetValue] = useState("");
+  const [statusOptions, setStatusOptions] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState("");
+  const [selectedStatusId, setSelectedStatusId] = useState(""); // State to hold selected model ID
   const [searchQueryforStatus, setSearchQueryforStatus] = useState("");
   const [formDataa, setFormData] = useState({});
 
-  const fetchStatusOptions = async () => {
+  const useStyles = styled((theme) => ({
+    select: {
+      width: "100%", // Adjust the width as needed
+      "& .MuiSelect-select.MuiSelect-select": {
+        paddingBottom: theme.spacing(1), // Adds spacing below the dropdown icon
+      },
+    },
+  }));
+
+  const fetchStatusOptions = async (name) => {
     try {
       const params = new URLSearchParams({
-        id: equipmentId, // Use the search query as the 'name' parameter
+        name: name, // Use the search query as the 'name' parameter
       });
 
-      const url = `https://localhost:7066/api/MaintenancePlan/EquipmentMpsDropDown?${params}`;
+      const url = `https://localhost:7066/api/Constants/EquipmentStatus?${params}`;
       const response = await axios.get(url);
       console.log("API response:", response.data); // Log the API response
 
-      // if (response.data && Array.isArray(response.data)) {
-      //   console.log("Fetched mp options:", response.data);
-      //   setStatusOptions(response.data.name);
-      if (Array.isArray(response.data)) {
-        const options = response.data.map((option) => ({
-          id: option.id,
-          name: option.name,
-        }));
-        setMpOptions(options);
+      if (response.data && Array.isArray(response.data)) {
+        console.log("Fetched status options:", response.data);
+        setStatusOptions(response.data);
       } else {
         console.error(
-          "API response does not contain an array of mp options:",
+          "API response does not contain an array of status options:",
           response.data
         );
       }
@@ -80,22 +82,14 @@ const EquipmentAddMpSettingModal = ({
     const formData = new FormData();
     // Include the selected status in the FormData
 
-    console.log("Selected Status:", selectedMpId);
-    console.log("Selected Status:", selectedMp);
-    console.log("Selected Status:", mpOption);
-    console.log("Selected status name:", selectedMp.name);
-    console.log("Selected status id:", selectedMp.id);
+    console.log("Selected Status:", selectedStatus);
     console.log("Equipment ID:", equipmentId);
-    console.log("resetValue:", resetValue);
-    formData.append("EquipmentId", equipmentId || null);
-    formData.append("MaintenancePlanId", selectedMp ? selectedMpId : "");
-    formData.append("sequenceValue", resetValue);
-
-    console.log(formData);
+    formData.append("id", equipmentId || null);
+    formData.append("newStatus", selectedStatus ? selectedStatus : "");
 
     try {
-      const response = await axios.post(
-        `https://localhost:7066/api/MaintenancePlan/SetMpSetting`,
+      const response = await axios.patch(
+        `https://localhost:7066/api/Equipment/StatusChange`,
 
         formData,
         {
@@ -114,8 +108,8 @@ const EquipmentAddMpSettingModal = ({
       if (response.status === 200) {
         console.log(formData);
         onClose();
-        onMpaddSuccess();
-        setSelectedMp("");
+        onStatusChangeSuccess();
+        setSelectedStatus("");
         setSearchQueryforStatus("");
         MySwal.fire({
           icon: "success",
@@ -129,7 +123,7 @@ const EquipmentAddMpSettingModal = ({
         });
 
         // Clear the selected status
-        setSelectedMp("");
+        setSelectedStatus("");
       } else if (response.status === 400) {
         console.log(formData);
         // Bad request with validation errors
@@ -172,20 +166,13 @@ const EquipmentAddMpSettingModal = ({
         <div className="modal_Header "></div>
         <form className="uh_Form_Container" onSubmit={handleSubmit}>
           <FormGroup className="mb-3">
-            <FormLabel>Mp</FormLabel>
+            <FormLabel>Status</FormLabel>
             <Autocomplete
               id="status-options"
-              options={mpOption}
-              getOptionLabel={(option) => option.name} // Use the name property as the display value
-              // getOptionSelected={(option, value) => option.id === value.id} // Compare based on the id property
-              value={selectedMp}
+              options={statusOptions}
+              value={selectedStatus}
               onChange={(event, newValue) => {
-                setSelectedMp(newValue);
-                if (newValue) {
-                  setSelecMpId(newValue.id); // Set the selected MP's ID
-                } else {
-                  setSelecMpId(""); // Clear the ID when nothing is selected
-                }
+                setSelectedStatus(newValue);
               }}
               onInputChange={(event, newInputValue) => {
                 setSearchQueryforStatus(newInputValue);
@@ -198,27 +185,7 @@ const EquipmentAddMpSettingModal = ({
                   variant="outlined"
                 />
               )}
-              renderOption={(props, option) => (
-                <li {...props}>{option.name}</li>
-              )}
-            />
-          </FormGroup>
-          <FormGroup className="mt">
-            <TextField
-              label="Reset Value"
-              type="number"
-              value={resetValue}
-              onChange={(e) => setresetValue(e.target.value)}
-              required
-              InputLabelProps={{
-                shrink: true,
-              }}
-              InputProps={{
-                classNamees: {
-                  root: "inputRoot",
-                  focused: "inputFocused",
-                },
-              }}
+              renderOption={(props, option) => <li {...props}>{option}</li>}
             />
           </FormGroup>
           <Button
@@ -238,4 +205,4 @@ const EquipmentAddMpSettingModal = ({
   );
 };
 
-export default EquipmentAddMpSettingModal;
+export default AssetStatusChangeModal;
