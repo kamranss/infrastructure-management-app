@@ -14,7 +14,7 @@ import {
   // HiMiniChevronDown,
 } from "react-icons/hi2";
 import { HiChevronDown, HiChevronRight } from "react-icons/hi";
-const PaginationComponent = ({
+const PaginationComponent2 = ({
   size,
   setSize,
   page,
@@ -66,4 +66,4 @@ const PaginationComponent = ({
     </Box>
   );
 };
-export default PaginationComponent;
+export default PaginationComponent2;

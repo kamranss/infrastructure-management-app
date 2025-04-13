@@ -13,7 +13,7 @@ const TableHeader = () => {
     <div className="tableHeadContainer">
       <div className="tableHead">
         <div className="tableHeadBox">
-          <NavLink className="header_nav_icon" to="/CreateEquipment">
+          <NavLink className="header_nav_icon" to="/AssetCreate">
             <FontAwesomeIcon icon={faSquarePlus} />
           </NavLink>
           <NavLink className="header_nav_icon" to="/EquipmentPage">

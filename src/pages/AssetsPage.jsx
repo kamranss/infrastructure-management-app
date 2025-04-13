@@ -1,13 +1,10 @@
-// import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Grid, Card, CardContent, Typography } from "@mui/material";
 import { CircularProgress } from "@mui/material";
-// import TableComponent from "../Components/Table";
-// import TableMui from "../Components/TableMui";
-import PaginationComponent from "../Components/PaginationComponent";
-import SideBarAssets from "../Components/SideBarAssets";
+import PaginationComponent2 from "../Components/Common/PaginationComponent2";
+import SideBarAssets from "../Components/SideBars/SideBarAssets";
 import TableHeader from "../Components/TableHeader";
 import TableAsset from "../Components/Tables/TableAsset";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +14,7 @@ export const EQUIPMENT_ENDPOINT =
   API_BASE_URL + import.meta.env.VITE_API_EQUIPMENT_PATH;
 
 import EquipmentModal from "../Components/Modals/EquipmentModal";
-// import HeaderNav from "../Components/Common/HeaderNav";
+
 import Dialog from "@mui/material/Dialog"; // Import Dialog component
 import DialogContent from "@mui/material/DialogContent"; // Import DialogContent component
 
@@ -263,7 +260,7 @@ const AssetsPage = () => {
                 onRowClick={(rowId) => handleTableRowClick(rowId)} // Pass the row click handler
               />
             )}
-            <PaginationComponent
+            <PaginationComponent2
               page={page}
               setPage={setPage}
               recordSize={size}

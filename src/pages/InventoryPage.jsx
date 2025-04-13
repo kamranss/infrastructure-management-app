@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import InventoryTable from "../Components/Tables/InventoryTable";
-import PaginationComponent from "../Components/PaginationComponent";
+import PaginationComponent from "../Components/Common/PaginationComponent";
 
 const staticLowStockParts = [
   { id: 1, code: "OFL", name: "Oil Filter", quantity: 2 },
@@ -142,7 +142,7 @@ const InventoryPage = () => {
               borderRadius: "8px",
               p: 1,
               mt: "1.5rem",
-              height: "100%",
+              // height: "100%",
             }}
           >
             <Typography

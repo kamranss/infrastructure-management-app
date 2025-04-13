@@ -15,6 +15,8 @@ import { useLocation } from "react-router-dom";
 import AssetsPage from "./pages/AssetsPage";
 import InventoryPage from "./pages/InventoryPage";
 import AssetDetails from "./pages/AssetDetails";
+import AssetCreate from "./pages/AssetCreate";
+import MaintenanceOverview from "./pages/MaintenanceOverview";
 
 // const isAssetDetailsPage = location.pathname.startsWith("/assetdetails");
 // const imageUrl = "/assets/images/assetmanagement.png";
@@ -55,18 +57,6 @@ const App = () => {
           {!hideHeader && <Header />}
           {!hideHeaderNav && <HeaderNav />}
 
-          {/* {!hideHeader && (
-            <div className={isAssetDetailsPage ? "header-bg-image" : ""}>
-              <Header />
-            </div>
-          )}
-          {!hideHeaderNav && (
-            <div className={isAssetDetailsPage ? "header-bg-image" : ""}>
-              <HeaderNav />
-            </div>
-          )} */}
-
-          {/* Wrap the Routes inside ErrorBoundary */}
           <ErrorBoundary>
             <Routes>
               <Route path="/" element={<Login />} />
@@ -77,6 +67,11 @@ const App = () => {
               <Route path="/inventorypage" element={<InventoryPage />} />{" "}
               <Route path="/assetdetails/:id" element={<AssetDetails />} />
               <Route path="/chat" element={<ChatPage />} />
+              <Route path="/assetcreate" element={<AssetCreate />} />
+              <Route
+                path="/maintenanceoverview"
+                element={<MaintenanceOverview />}
+              />
             </Routes>
           </ErrorBoundary>
         </div>

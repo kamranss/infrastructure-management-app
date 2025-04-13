@@ -24,12 +24,13 @@ const navLinks = [
   { to: "/assetsPage", icon: <ListIcon /> },
   { to: "/AssetDetails", icon: <TaskAlt /> },
   { to: "/usageHistory", icon: <CalendarMonth /> },
-  { to: "/mppage", icon: <BuildCircleIcon /> },
+  { to: "/maintenanceoverview", icon: <BuildCircleIcon /> },
   { to: "/inventorypage", icon: <Warehouse /> },
   { to: "/department", icon: <CorporateFareIcon /> },
   { to: "/dashboard", icon: <ShowChart /> },
   { to: "/chat", icon: <ChatBubbleOutline /> },
   { to: "/administration", icon: <Tune /> },
+  
 ];
 
 const HeaderNav = () => {
