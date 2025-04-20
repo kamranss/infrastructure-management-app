@@ -93,6 +93,7 @@
 // export default MpFilterAndTable;
 
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import CommonTable from "../Common/CommonTable";
 import CommonFilter from "../Common/CommonFilter";
@@ -150,7 +151,7 @@ const MpFilterAndTable = ({ activeTab }) => {
   const [filtersConfig, setFiltersConfig] = useState([]);
   const [filters, setFilters] = useState({});
   const [rows, setRows] = useState([]);
-
+  const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
@@ -200,7 +201,13 @@ const MpFilterAndTable = ({ activeTab }) => {
         filters={filters}
         onChange={handleFilterChange}
       />
-      <CommonTable columns={columns} rows={filteredRows} />
+      {/* <CommonTable columns={columns} rows={filteredRows} /> */}
+
+      <CommonTable
+        columns={columns}
+        rows={filteredRows}
+        onView={(row) => navigate(`/maintenance-plan/${row.id}`)}
+      />
       <PaginationComponent2
         size={pageSize}
         setSize={setPageSize}

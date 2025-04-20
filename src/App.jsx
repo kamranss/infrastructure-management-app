@@ -17,6 +17,7 @@ import InventoryPage from "./pages/InventoryPage";
 import AssetDetails from "./pages/AssetDetails";
 import AssetCreate from "./pages/AssetCreate";
 import MaintenanceOverview from "./pages/MaintenanceOverview";
+import MpDetail from "./pages/MpDetail";
 
 // const isAssetDetailsPage = location.pathname.startsWith("/assetdetails");
 // const imageUrl = "/assets/images/assetmanagement.png";
@@ -68,6 +69,7 @@ const App = () => {
               <Route path="/assetdetails/:id" element={<AssetDetails />} />
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/assetcreate" element={<AssetCreate />} />
+              <Route path="/maintenance-plan/:id" element={<MpDetail />} />
               <Route
                 path="/maintenanceoverview"
                 element={<MaintenanceOverview />}

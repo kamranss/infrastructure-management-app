@@ -440,10 +440,10 @@ const FormCreateAsset = () => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <form onSubmit={handleSubmit} style={{ padding: "16px" }}>
-        <h2 style={{ marginBottom: 16 }}>Create Equipment</h2>
+        <h2 style={{ marginBottom: 16 }}>Create Asset</h2>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={3}>
-            <FormLabel>Equipment Name</FormLabel>
+            <FormLabel>Asset Name</FormLabel>
             <TextField
               fullWidth
               onChange={(e) => handleInputChange("Name", e.target.value)}
