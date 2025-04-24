@@ -260,10 +260,6 @@
 
 // export default FormCreateAsset;
 
-
-
-
-
 import React, { useEffect, useState } from "react";
 import {
   Grid,
@@ -400,7 +396,7 @@ const FormCreateAsset = () => {
 
       if (response.ok) {
         await MySwal.fire({ icon: "success", title: "Created" });
-        window.location.href = "/EquipmentPage";
+        window.location.href = "/assetsPage";
       } else if (response.status === 400) {
         const errorData = await response.json();
         setValidationErrors(errorData.errors || {});
@@ -554,5 +550,3 @@ const FormCreateAsset = () => {
 };
 
 export default FormCreateAsset;
-
-
