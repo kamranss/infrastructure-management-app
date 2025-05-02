@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import clock from "/src/assets/icons/clock.png";
+import correct from "/src/assets/icons/correct.png";
 
 const TableAssetMp = ({ maintenancePlans = [], onServiceClick }) => {
   const [page, setPage] = useState(0);
@@ -113,7 +115,7 @@ const TableAssetMp = ({ maintenancePlans = [], onServiceClick }) => {
 
                 return (
                   <TableRow key={row.id}>
-                    <TableCell>
+                    {/* <TableCell>
                       {isCompleted === false || isCompleted === null ? (
                         <AccessTimeIcon
                           titleAccess="Not Completed"
@@ -126,6 +128,33 @@ const TableAssetMp = ({ maintenancePlans = [], onServiceClick }) => {
                           color="success"
                         />
                       )}
+                    </TableCell> */}
+                    <TableCell>
+                      <img
+                        src={
+                          isCompleted === false || isCompleted === null
+                            ? clock
+                            : correct
+                        }
+                        alt={
+                          isCompleted === false || isCompleted === null
+                            ? "Not Completed"
+                            : "Completed"
+                        }
+                        title={
+                          isCompleted === false || isCompleted === null
+                            ? "Not Completed"
+                            : "Completed"
+                        }
+                        style={{
+                          width: "24px",
+                          height: "24px",
+                          animation:
+                            isCompleted === false || isCompleted === null
+                              ? "blinkRed 1s linear infinite"
+                              : "none",
+                        }}
+                      />
                     </TableCell>
                     <TableCell>{row.id}</TableCell>
                     <TableCell>{row.code}</TableCell>

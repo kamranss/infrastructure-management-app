@@ -14,28 +14,26 @@ import moment from "moment";
 import { NavLink } from "react-router-dom";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import VisibilityIcon from "@mui/icons-material/Visibility"; // make sure this is imported
+import VisibilityIcon from "@mui/icons-material/Visibility";
+// import { CheckCircle, AlarmClock } from "lucide-react";
+import { AiOutlineClockCircle } from "react-icons/ai"; // blinking red
+import { MdCheckCircle } from "react-icons/md"; // green check
+import clock from "/src/assets/icons/clock.png";
+import correct from "/src/assets/icons/correct.png";
 
 export default function TableAsset({ thead = [], rows = [], onRowClick }) {
+  // ✅ Sort rows: mpTime === true (or mpTimeCompleted === false) rows to top
   rows.sort((a, b) => {
-    // Convert mpTime to boolean (null and true will be treated as true, false will be treated as false)
-    // const aMpTime = !!a.mpTime;
-    // const bMpTime = !!b.mpTime;
-
-    // if (aMpTime < bMpTime) return -1;
-    // if (aMpTime > bMpTime) return 1;
-
-    const aMpTime = !!a.mpTime;
-    const bMpTime = !!b.mpTime;
-    return aMpTime - bMpTime;
-    // return 0;
+    const aMp = a.mpTime === false ? 1 : 0;
+    const bMp = b.mpTime === false ? 1 : 0;
+    return bMp - aMp; // false (blinking clock) rows go to top
   });
   return (
     <TableContainer
       component={Paper}
       sx={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
     >
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }} aria-label="asset table">
         <TableHead>
           <TableRow>
             <TableCell
@@ -54,7 +52,7 @@ export default function TableAsset({ thead = [], rows = [], onRowClick }) {
               <TableCell
                 key={key}
                 sx={{
-                  backgroundColor: "rgb(190, 213, 236)", // Light gray bg
+                  backgroundColor: "rgb(190, 213, 236)",
                   fontWeight: "bold",
                   borderBottom: "2px solid #e0e0e0",
                   color: "#333",
@@ -86,14 +84,15 @@ export default function TableAsset({ thead = [], rows = [], onRowClick }) {
               <TableRow
                 key={key}
                 onClick={() => onRowClick(row.id)}
-                // className={`row ${statusclassName}`} // Add 'row' className and status className
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  backgroundColor: row.mpTime === false ? "#e3f2fd" : "#ffffff",
+                }}
               >
                 <TableCell align="left">
                   <Tooltip title="View Asset Details">
                     <IconButton
                       component={NavLink}
-                      // to={`/assetdetails?id=${row.id}`}
                       to={`/assetdetails/${row.id}`}
                       size="small"
                     >
@@ -102,55 +101,61 @@ export default function TableAsset({ thead = [], rows = [], onRowClick }) {
                   </Tooltip>
                 </TableCell>
 
-                <TableCell align="left">
-                  {row.mpTime !== true && row.mpTime !== null ? (
-                    <AccessTimeIcon
-                      sx={{
-                        color: "#fbc02d",
-                        animation: "pulse 1.2s infinite",
-                      }}
-                    />
+                {/* ✅ MP Time Icon */}
+                {/* <TableCell align="left">
+                  {row.mpTime === false ? (
+              
+                    <span
+                      className="blinking-clock"
+                      style={{ fontSize: "20px", color: "red" }}
+                    >
+                      🕒
+                    </span>
                   ) : (
-                    <CheckCircleIcon sx={{ color: "#66bb6a" }} />
+                    <CheckCircleIcon style={{ color: "green", fontSize: 20 }} />
                   )}
                 </TableCell>
-
+                 */}
+                {/* <TableCell align="left">
+                  {row.mpTime === false ? (
+                    <AiOutlineClockCircle
+                      className="blinking-clock red-icon"
+                      style={{ color: "red !important", fontSize: 26 }}
+                    />
+                  ) : (
+                    <MdCheckCircle
+                      className="green-icon"
+                      style={{ color: "green !important", fontSize: 26 }}
+                    />
+                  )}
+                </TableCell> */}
+                <TableCell align="left">
+                  <img
+                    src={row.mpTime === false ? clock : correct}
+                    alt={row.mpTime === false ? "MP Due" : "MP OK"}
+                    style={{
+                      width: "27px",
+                      height: "27px",
+                      animation:
+                        row.mpTime === false
+                          ? "blinkRed 1s linear infinite"
+                          : "none",
+                    }}
+                  />
+                </TableCell>
                 <TableCell align="left">{row?.id}</TableCell>
-
                 <TableCell align="left">{row?.name}</TableCell>
                 <TableCell align="left">{row?.description || "-"}</TableCell>
                 <TableCell align="left">{row?.operationSite || "-"}</TableCell>
                 <TableCell align="left">{row?.productionYear || "-"}</TableCell>
                 <TableCell align="left">{row?.serialNumber || "-"}</TableCell>
                 <TableCell align="left">{row?.type || "-"}</TableCell>
+
                 <TableCell
-                  className={`${
-                    row.status === "ACTIVE"
-                      ? "row-active"
-                      : row.status === "INACTIVE"
-                      ? "row-inactive"
-                      : row.status === "REPAIR"
-                      ? "row-repair"
-                      : row.status === "IN_USE"
-                      ? "row-inuse"
-                      : row.status === "CONCERVATED"
-                      ? "row-concervated"
-                      : ""
-                  }`}
+                  className={statusclassName}
                   align="left"
                   style={{
-                    color:
-                      row.status === "ACTIVE"
-                        ? "white"
-                        : row.status === "INACTIVE"
-                        ? "white"
-                        : row.status === "REPAIR"
-                        ? "white"
-                        : row.status === "IN_USE"
-                        ? "white"
-                        : row.status === "CONCERVATED"
-                        ? "white"
-                        : "white",
+                    color: "white",
                     fontWeight: "bold",
                     textAlign: "center",
                     fontSize: "14px",
@@ -164,6 +169,7 @@ export default function TableAsset({ thead = [], rows = [], onRowClick }) {
                     ? moment(row.lastMaintenace).format("DD-MM-YYYY")
                     : "Not Available"}
                 </TableCell>
+
                 <TableCell align="left">{row?.currentValue || "-"}</TableCell>
 
                 <TableCell align="left">

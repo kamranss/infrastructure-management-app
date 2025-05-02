@@ -51,3 +51,22 @@
     transform: scale(1);
   }
 }
+
+.red-icon {
+  color: red !important;
+  font-size: 20px;
+}
+
+.green-icon {
+  color: green !important;
+  font-size: 20px;
+}
+.blinking-clock {
+  animation: blinkRed 1s linear infinite;
+}
+
+@keyframes blinkRed {
+  50% {
+    opacity: 0;
+  }
+}
