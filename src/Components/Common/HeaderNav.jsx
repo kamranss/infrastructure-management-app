@@ -22,15 +22,14 @@ import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 
 const navLinks = [
   { to: "/assetsPage", icon: <ListIcon /> },
-  { to: "/AssetDetails", icon: <TaskAlt /> },
+  // { to: "/AssetDetails", icon: <TaskAlt /> },
   { to: "/usageHistory", icon: <CalendarMonth /> },
   { to: "/maintenanceoverview", icon: <BuildCircleIcon /> },
   { to: "/inventorypage", icon: <Warehouse /> },
-  { to: "/department", icon: <CorporateFareIcon /> },
+  // { to: "/department", icon: <CorporateFareIcon /> },
   { to: "/dashboard", icon: <ShowChart /> },
   { to: "/chat", icon: <ChatBubbleOutline /> },
   { to: "/administration", icon: <Tune /> },
-  
 ];
 
 const HeaderNav = () => {

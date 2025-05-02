@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -17,7 +15,7 @@ import {
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-const TableAssetMp = ({ maintenancePlans = [] }) => {
+const TableAssetMp = ({ maintenancePlans = [], onServiceClick }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -141,10 +139,10 @@ const TableAssetMp = ({ maintenancePlans = [] }) => {
                         variant="contained"
                         size="small"
                         color="primary"
-                        onClick={() => handleCompleteMp(row)}
+                        onClick={() => onServiceClick?.(row)}
                         sx={{ fontSize: "12px", px: 1.5, py: 0.5 }}
                       >
-                        Complete MP
+                        Service
                       </Button>
                     </TableCell>
                   </TableRow>

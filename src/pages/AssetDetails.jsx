@@ -1,158 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import axios from "axios";
-// import { CircularProgress, Grid, Typography, Box } from "@mui/material";
-
-// import { App_Base_URL } from "../constants/apiRoutes";
-
-// import AssetStatusChangeModal from "../Components/Modals/AssetStatusChangeModal";
-// import AssetAddMpModal from "../Components/Modals/AssetAddMpModal";
-// import AssetAddPartModal from "../Components/Modals/AssetAddPartModal";
-// import AssetAddMpSettingModal from "../Components/Modals/AssetAddMpSettingModal";
-// import TableAssetPart from "../Components/Tables/TableAssetPart";
-// import TableAssetMp from "../Components/Tables/TableAssetMp";
-
-// import AssetImageCard from "../Components/AssetDetailComponents/AssetImageCard";
-// import AssetStatusActions from "../Components/AssetDetailComponents/AssetStatusActions";
-// import AssetInfoCard from "../Components/AssetDetailComponents/AssetInfoCard";
-// import AssetSummaryCards from "../Components/AssetDetailComponents/AssetSummaryCards";
-
-// const imageBaseUrl = import.meta.env.VITE_IMAGE_BASE_URL;
-// const AssetDetails = () => {
-//   const { id: rowId } = useParams();
-//   const [equipmentDetail, setEquipmentDetail] = useState(null);
-//   const [isLoading, setIsLoading] = useState(true);
-
-//   const [modals, setModals] = useState({
-//     status: false,
-//     part: false,
-//     mp: false,
-//     delete: false,
-//     mpSettings: false,
-//   });
-
-//   const toggleModal = (name, value = true) => {
-//     setModals((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   useEffect(() => {
-//     if (!rowId) return;
-
-//     axios
-//       .get(`https://localhost:7066/api/Equipment`, {
-//         params: { id: rowId },
-//       })
-//       .then((response) => {
-//         setEquipmentDetail(response.data);
-//         setIsLoading(false);
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching equipment detail:", error);
-//         setIsLoading(false);
-//       });
-//   }, [rowId]);
-
-//   const refreshEquipmentDetails = async () => {
-//     try {
-//       const response = await axios.get(`https://localhost:7066/api/Equipment`, {
-//         params: { id: rowId },
-//       });
-//       setEquipmentDetail(response.data);
-//       setModals({
-//         status: false,
-//         part: false,
-//         mp: false,
-//         delete: false,
-//         mpSettings: false,
-//       });
-//     } catch (error) {
-//       console.error("Error refreshing equipment details:", error);
-//     }
-//   };
-
-//   console.log("🔍 Payload being sent to backend:", equipmentDetail); // 👈 Log here
-//   const imageUrl = "/assets/images/assetmanagement2.png";
-
-//   if (isLoading) {
-//     return (
-//       <Box display="flex" justifyContent="center" mt={4}>
-//         <CircularProgress />
-//       </Box>
-//     );
-//   }
-
-//   if (!equipmentDetail) {
-//     return (
-//       <Box display="flex" justifyContent="center" mt={4}>
-//         <Typography variant="h6" color="error">
-//           No equipment detail found.
-//         </Typography>
-//       </Box>
-//     );
-//   }
-
-//   return (
-//     <Box p={2}>
-//       <Grid container spacing={2}>
-//         {/* Left Side */}
-//         <Grid item xs={12} md={4}>
-//           <AssetImageCard imageUrl={imageUrl} />
-//           <AssetStatusActions
-//             status={equipmentDetail.status}
-//             onToggle={toggleModal}
-//           />
-//           <AssetInfoCard detail={equipmentDetail} />
-//         </Grid>
-
-//         {/* Right Side */}
-//         <Grid item xs={12} md={8}>
-//           <AssetSummaryCards detail={equipmentDetail} />
-
-//           <Grid container spacing={2}>
-//             <Grid item xs={12} md={6}>
-//               <Typography variant="h6">Maintenance Plans</Typography>
-//               <TableAssetMp maintenancePlans={equipmentDetail.mpList} />
-//             </Grid>
-
-//             <Grid item xs={12} md={6}>
-//               <Typography variant="h6">Parts</Typography>
-//               <TableAssetPart parts={equipmentDetail.partList} />
-//             </Grid>
-//           </Grid>
-//         </Grid>
-//       </Grid>
-
-//       {/* Modals */}
-//       <AssetStatusChangeModal
-//         isOpen={modals.status}
-//         onClose={() => toggleModal("status", false)}
-//         equipmentId={equipmentDetail.id}
-//         onStatusChangeSuccess={refreshEquipmentDetails}
-//       />
-//       <AssetAddPartModal
-//         isOpen={modals.part}
-//         onClose={() => toggleModal("part", false)}
-//         equipmentId={equipmentDetail.id}
-//         onMpaddSuccess={refreshEquipmentDetails}
-//       />
-//       <AssetAddMpModal
-//         isOpen={modals.mp}
-//         onClose={() => toggleModal("mp", false)}
-//         equipmentId={equipmentDetail.id}
-//         onMpaddSuccess={refreshEquipmentDetails}
-//       />
-//       <AssetAddMpSettingModal
-//         isOpen={modals.mpSettings}
-//         onClose={() => toggleModal("mpSettings", false)}
-//         equipmentId={equipmentDetail.id}
-//         onMpaddSuccess={refreshEquipmentDetails}
-//       />
-//     </Box>
-//   );
-// };
-
-// export default AssetDetails;
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -168,6 +13,7 @@ import AssetImageCard from "../Components/AssetDetailComponents/AssetImageCard";
 import AssetStatusActions from "../Components/AssetDetailComponents/AssetStatusActions";
 import AssetInfoCard from "../Components/AssetDetailComponents/AssetInfoCard";
 import AssetSummaryCards from "../Components/AssetDetailComponents/AssetSummaryCards";
+import MpServiceDrawer from "../Components/AssetDetailComponents/MpServiceDrawer";
 
 const AssetDetails = () => {
   const { id: rowId } = useParams();
@@ -181,6 +27,9 @@ const AssetDetails = () => {
     delete: false,
     mpSettings: false,
   });
+
+  const [selectedMp, setSelectedMp] = useState(null);
+  const [isMpServiceDrawerOpen, setIsMpServiceDrawerOpen] = useState(false);
 
   const imageUrl = "/assets/images/assetmanagement2.png";
   const endpoints = {
@@ -294,7 +143,14 @@ const AssetDetails = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <Typography variant="h6">Maintenance Plans</Typography>
-              <TableAssetMp maintenancePlans={equipmentDetail.mpList} />
+              {/* <TableAssetMp maintenancePlans={equipmentDetail.mpList} /> */}
+              <TableAssetMp
+                maintenancePlans={equipmentDetail.mpList}
+                onServiceClick={(mp) => {
+                  setSelectedMp(mp);
+                  setIsMpServiceDrawerOpen(true);
+                }}
+              />
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography variant="h6">Parts</Typography>
@@ -327,6 +183,12 @@ const AssetDetails = () => {
         onClose={() => toggleModal("mpSettings", false)}
         equipmentId={equipmentDetail.id}
         onMpaddSuccess={refreshEquipmentDetails}
+      />
+      <MpServiceDrawer
+        open={isMpServiceDrawerOpen}
+        onClose={() => setIsMpServiceDrawerOpen(false)}
+        maintenancePlan={selectedMp}
+        equipmentId={equipmentDetail.id}
       />
     </Box>
   );

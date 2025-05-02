@@ -33,7 +33,7 @@ const PaginationComponent2 = ({
       className="pagination"
     >
       <Select
-        value={size}
+        value={size || 10}
         onChange={(e) => setSize(e.target.value)}
         displayEmpty
         inputProps={{ "aria-label": "Without label" }}
