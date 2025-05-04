@@ -19,6 +19,8 @@ const AssetDetails = () => {
   const { id: rowId } = useParams();
   const [equipmentDetail, setEquipmentDetail] = useState(null);
   const [dropdowns, setDropdowns] = useState(null);
+  const [serviceStatuses, setServiceStatuses] = useState([]);
+
   const [isLoading, setIsLoading] = useState(true);
   const [modals, setModals] = useState({
     status: false,
@@ -84,6 +86,21 @@ const AssetDetails = () => {
           ) || null,
       };
 
+      const statusResults = await Promise.all(
+        (equipment.mpList || []).map((mp) =>
+          axios
+            .get(
+              `${import.meta.env.VITE_API_BASE_URL}${
+                import.meta.env.VITE_API_SERVICE_STATUSES
+              }`,
+              { params: { equipmentId: equipment.id, mpId: mp.id } }
+            )
+            .then((res) => ({ mpId: mp.id, statuses: res.data }))
+            .catch(() => ({ mpId: mp.id, statuses: [] }))
+        )
+      );
+
+      setServiceStatuses(statusResults); // mpId + status array per MP
       setEquipmentDetail(enriched);
       setDropdowns(dropdownData);
       setIsLoading(false);
@@ -145,6 +162,7 @@ const AssetDetails = () => {
               <Typography variant="h6">Maintenance Plans</Typography>
               {/* <TableAssetMp maintenancePlans={equipmentDetail.mpList} /> */}
               <TableAssetMp
+                serviceStatuses={serviceStatuses}
                 maintenancePlans={equipmentDetail.mpList}
                 onServiceClick={(mp) => {
                   setSelectedMp(mp);
@@ -185,10 +203,25 @@ const AssetDetails = () => {
         onMpaddSuccess={refreshEquipmentDetails}
       />
       <MpServiceDrawer
+        // open={isMpServiceDrawerOpen}
+        // onClose={() => setIsMpServiceDrawerOpen(false)}
+        // maintenancePlan={selectedMp}
+        // equipmentId={equipmentDetail.id}
+        // equipmentDetail={equipmentDetail}
+        // open={isMpServiceDrawerOpen}
+        // onClose={() => setIsMpServiceDrawerOpen(false)}
+        // maintenancePlan={selectedMp}
+        // equipmentId={equipmentDetail.id}
+        // equipmentDetail={equipmentDetail}
+        // serviceStatuses={serviceStatuses}
+
         open={isMpServiceDrawerOpen}
         onClose={() => setIsMpServiceDrawerOpen(false)}
         maintenancePlan={selectedMp}
         equipmentId={equipmentDetail.id}
+        equipmentDetail={equipmentDetail}
+        serviceStatuses={serviceStatuses}
+        onRefresh={refreshEquipmentDetails}
       />
     </Box>
   );
