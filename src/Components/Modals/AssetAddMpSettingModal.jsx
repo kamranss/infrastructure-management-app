@@ -36,13 +36,10 @@ const AssettAddMpSettingModal = ({
         id: equipmentId, // Use the search query as the 'name' parameter
       });
 
-      const url = `https://localhost:7066/api/MaintenancePlan/EquipmentMpsDropDown?${params}`;
+      const url = `https://localhost:7066/api/MaintenancePlan/dropdown?${params}`;
       const response = await axios.get(url);
-      console.log("API response:", response.data); // Log the API response
+      console.log("API response:", response.data);
 
-      // if (response.data && Array.isArray(response.data)) {
-      //   console.log("Fetched mp options:", response.data);
-      //   setStatusOptions(response.data.name);
       if (Array.isArray(response.data)) {
         const options = response.data.map((option) => ({
           id: option.id,
@@ -61,13 +58,6 @@ const AssettAddMpSettingModal = ({
   };
 
   const fetchStatuses = debounce(fetchStatusOptions, 300);
-
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     // Fetch status options when the modal opens
-  //     fetchStatusOptions(searchQueryforStatus);
-  //   }
-  // }, [searchQueryforStatus]);
 
   useEffect(() => {
     fetchStatusOptions(searchQueryforStatus);

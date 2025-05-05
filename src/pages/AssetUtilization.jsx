@@ -93,17 +93,6 @@ const AssetUtilization = () => {
     if (sidebarDepartments.length > 0) fetchUsageHistory();
   }, [sidebarDepartments, activeTab, page, size, filters]);
 
-  //   const filterConfig = [
-  //     { name: "operatorName", label: "Operator", type: "text" },
-  //     { name: "operationName", label: "Operation", type: "text" },
-  //     {
-  //       name: "status",
-  //       label: "Status",
-  //       type: "select",
-  //       options: ["ONGOING", "FINISHED", "CANCELED"],
-  //     },
-  //   ];
-
   const filterConfig = [
     { name: "operatorName", label: "Operator", type: "text" },
     {
@@ -157,7 +146,12 @@ const AssetUtilization = () => {
     { field: "operationName", headerName: "Operation" },
     { field: "startDate", headerName: "Start Date" },
     { field: "endDate", headerName: "End Date" },
-    { field: "totalTime", headerName: "Used (hrs)" },
+    // { field: "totalTime", headerName: "Used (hrs)" },
+    {
+      field: "totalTime",
+      headerName: "Used (hrs)",
+      renderCell: ({ row }) => Number(row.totalTime).toFixed(1),
+    },
     {
       field: "status",
       headerName: "Status",
@@ -237,11 +231,18 @@ const AssetUtilization = () => {
                 </Grid>
               </Grid>
 
-              <CommonTable
+              {/* <CommonTable
                 columns={columns}
                 rows={tableData.items}
                 onView={(row) => console.log("Clicked row:", row)}
-              />
+              /> */}
+              <Box sx={{ minWidth: "100%", overflowX: "auto" }}>
+                <CommonTable
+                  columns={columns}
+                  rows={tableData.items}
+                  onView={(row) => console.log("Clicked row:", row)}
+                />
+              </Box>
 
               <PaginationComponent2
                 page={page}

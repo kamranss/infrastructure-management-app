@@ -14,6 +14,7 @@ import AssetStatusActions from "../Components/AssetDetailComponents/AssetStatusA
 import AssetInfoCard from "../Components/AssetDetailComponents/AssetInfoCard";
 import AssetSummaryCards from "../Components/AssetDetailComponents/AssetSummaryCards";
 import MpServiceDrawer from "../Components/AssetDetailComponents/MpServiceDrawer";
+import AssetUsageTable from "../Components/AssetDetailComponents/AssetUsageTable"; // adjust the path
 
 const AssetDetails = () => {
   const { id: rowId } = useParams();
@@ -32,6 +33,7 @@ const AssetDetails = () => {
 
   const [selectedMp, setSelectedMp] = useState(null);
   const [isMpServiceDrawerOpen, setIsMpServiceDrawerOpen] = useState(false);
+  const [usageHistory, setUsageHistory] = useState([]);
 
   const imageUrl = "/assets/images/assetmanagement2.png";
   const endpoints = {
@@ -42,6 +44,18 @@ const AssetDetails = () => {
     operationSite: "OperationSite",
   };
 
+  const fetchUsageHistory = async () => {
+    try {
+      const res = await axios.get(
+        `${
+          import.meta.env.VITE_API_BASE_URL
+        }/api/UsageHistory/equipment/${rowId}`
+      );
+      setUsageHistory(res.data);
+    } catch (error) {
+      console.error("Failed to fetch usage history:", error);
+    }
+  };
   const fetchDropdowns = async () => {
     const entries = await Promise.all(
       Object.entries(endpoints).map(async ([key, endpoint]) => {
@@ -112,6 +126,8 @@ const AssetDetails = () => {
 
   useEffect(() => {
     if (rowId) fetchData();
+    fetchData();
+    fetchUsageHistory();
   }, [rowId]);
 
   const toggleModal = (name, value = true) => {
@@ -174,6 +190,11 @@ const AssetDetails = () => {
               <Typography variant="h6">Parts</Typography>
               <TableAssetPart parts={equipmentDetail.partList} />
             </Grid>
+            <Grid item xs={12} md={12}>
+              <Box>
+                <AssetUsageTable rows={usageHistory} />
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -203,18 +224,6 @@ const AssetDetails = () => {
         onMpaddSuccess={refreshEquipmentDetails}
       />
       <MpServiceDrawer
-        // open={isMpServiceDrawerOpen}
-        // onClose={() => setIsMpServiceDrawerOpen(false)}
-        // maintenancePlan={selectedMp}
-        // equipmentId={equipmentDetail.id}
-        // equipmentDetail={equipmentDetail}
-        // open={isMpServiceDrawerOpen}
-        // onClose={() => setIsMpServiceDrawerOpen(false)}
-        // maintenancePlan={selectedMp}
-        // equipmentId={equipmentDetail.id}
-        // equipmentDetail={equipmentDetail}
-        // serviceStatuses={serviceStatuses}
-
         open={isMpServiceDrawerOpen}
         onClose={() => setIsMpServiceDrawerOpen(false)}
         maintenancePlan={selectedMp}
